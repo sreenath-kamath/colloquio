@@ -7,7 +7,7 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet id="create_interview_round" author="">
-        <createTable tableName="InterviewRoundSkills">
+        <createTable tableName="interview_round_skills">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -25,18 +25,18 @@
             </column>
         </createTable>
         <addForeignKeyConstraint baseColumnNames="interview_round_id"
-                                 baseTableName="InterviewRoundSkills"
+                                 baseTableName="interview_round_skills"
                                  constraintName="fk_interview_round_id"
                                  onDelete="CASCADE"
                                  onUpdate="CASCADE"
                                  referencedColumnNames="id"
-                                 referencedTableName="InterviewRounds"/>
+                                 referencedTableName="interview_rounds"/>
         <addForeignKeyConstraint baseColumnNames="skill_id"
-                                 baseTableName="InterviewRoundSkills"
+                                 baseTableName="interview_round_skills"
                                  constraintName="fk_skill_id"
                                  onDelete="CASCADE"
                                  onUpdate="CASCADE"
                                  referencedColumnNames="id"
-                                 referencedTableName="Skills"/>
+                                 referencedTableName="skills"/>
     </changeSet>
 </databaseChangeLog>

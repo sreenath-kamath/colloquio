@@ -7,14 +7,14 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet id="create_interview_round" author="">
-        <createTable tableName="InterviewRounds">
+        <createTable tableName="interview_rounds">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="Name" type="varchar(255)">
+            <column name="name" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="Description" type="clob">
+            <column name="description" type="clob">
                 <constraints nullable="false"/>
             </column>
             <column name="created_at" type="datetime">
