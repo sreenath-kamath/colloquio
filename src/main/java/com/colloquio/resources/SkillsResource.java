@@ -1,7 +1,6 @@
 package com.colloquio.resources;
 
 import com.codahale.metrics.annotation.Timed;
-import com.colloquio.api.Info;
 import com.colloquio.core.Skills;
 import com.colloquio.db.SkillsDao;
 
@@ -23,10 +22,10 @@ public class SkillsResource {
 
     @GET
     @Timed
-    public Info getSkills(
+    public Skills getSkills(
             @QueryParam("id") @NotNull Long skillId
     ) {
-        String skills = skillsDao.findSkillById(skillId);
-        return new Info(skillId, skills);
+        Skills skills = skillsDao.findSkillById(skillId);
+        return skills;
     }
 }
