@@ -7,7 +7,7 @@ import org.jdbi.v3.sqlobject.statement.SqlQuery;
 
 public interface SkillsDao {
 
-    @SqlQuery("select * from skills where id = :id")
+    @SqlQuery("select * from Skills where id = :id")
     @RegisterBeanMapper(Skills.class)
     Skills findSkillById(@Bind("id") Long id);
 
