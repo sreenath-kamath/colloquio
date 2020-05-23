@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="create_interview_round_ratings" author="">
+        <createTable tableName="InterviewRatings">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="Rating" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Feedback" type="clob">
+                <constraints nullable="false"/>
+            </column>
+            <column name="interview_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="skill_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="skill_id"
+                                 baseTableName="InterviewRatings"
+                                 constraintName="fk_interview_skill_id"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="id"
+                                 referencedTableName="Skills"/>
+        <addForeignKeyConstraint baseColumnNames="interview_id"
+                                 baseTableName="InterviewRatings"
+                                 constraintName="fk_interview_ratings_id"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="id"
+                                 referencedTableName="Interviews"/>
+    </changeSet>
+</databaseChangeLog>
