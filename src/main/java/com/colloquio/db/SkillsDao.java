@@ -14,7 +14,8 @@ public interface SkillsDao {
     Skills findSkillById(@Bind("id") Long id);
 
     @AllowUnusedBindings
-    @SqlQuery("insert into skills(name, description, created_at, updated_at) values(:name, :description, now(), now())")
+    @RegisterBeanMapper(Skills.class)
     @GetGeneratedKeys
+    @SqlQuery("insert into skills(name, description, created_at, updated_at) values(:name, :description, now(), now())")
     Skills createSkill(@Bind("name") String name, @Bind("description") String description);
 }
