@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="create_interviews" author="">
+        <createTable tableName="Interviews">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="Rating" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Feedback" type="clob">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="scheduled_at" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="candidate_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="interview_round_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="interview_round_id"
+                                 baseTableName="Interviews"
+                                 constraintName="fk_interview_round_id_interview"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="id"
+                                 referencedTableName="InterviewRounds"/>
+        <addForeignKeyConstraint baseColumnNames="candidate_id"
+                                 baseTableName="Interviews"
+                                 constraintName="fk_candidate_id"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="id"
+                                 referencedTableName="Candidates"/>
+    </changeSet>
+</databaseChangeLog>
