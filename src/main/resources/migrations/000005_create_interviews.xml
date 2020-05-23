@@ -7,14 +7,14 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet id="create_interviews" author="">
-        <createTable tableName="Interviews">
+        <createTable tableName="interviews">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="Rating" type="int">
+            <column name="rating" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="Feedback" type="clob">
+            <column name="feedback" type="clob">
                 <constraints nullable="false"/>
             </column>
             <column name="created_at" type="datetime">
@@ -34,18 +34,18 @@
             </column>
         </createTable>
         <addForeignKeyConstraint baseColumnNames="interview_round_id"
-                                 baseTableName="Interviews"
+                                 baseTableName="interviews"
                                  constraintName="fk_interview_round_id_interview"
                                  onDelete="CASCADE"
                                  onUpdate="CASCADE"
                                  referencedColumnNames="id"
-                                 referencedTableName="InterviewRounds"/>
+                                 referencedTableName="interview_rounds"/>
         <addForeignKeyConstraint baseColumnNames="candidate_id"
-                                 baseTableName="Interviews"
+                                 baseTableName="interviews"
                                  constraintName="fk_candidate_id"
                                  onDelete="CASCADE"
                                  onUpdate="CASCADE"
                                  referencedColumnNames="id"
-                                 referencedTableName="Candidates"/>
+                                 referencedTableName="candidates"/>
     </changeSet>
 </databaseChangeLog>

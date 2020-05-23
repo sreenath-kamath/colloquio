@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet id="initial_data_load" author="">
+        <insert tableName="skills">
+            <column name="name" value="Communication"/>
+            <column name="description" value="Whether the candidate is able to communicate properly"/>
+            <column name="created_at" value="now()"/>
+            <column name="updated_at" value="now()"/>
+        </insert>
+        <insert tableName="users">
+            <column name="full_name" value="Admin"/>
+            <column name="email" value="admin@org.com"/>
+            <column name="password" value="admin"/>
+            <column name="phone_number" value="1234567890"/>
+            <column name="created_at" value="now()"/>
+            <column name="updated_at" value="now()"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

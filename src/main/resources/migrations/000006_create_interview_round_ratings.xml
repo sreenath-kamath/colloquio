@@ -7,14 +7,14 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet id="create_interview_round_ratings" author="">
-        <createTable tableName="InterviewRatings">
+        <createTable tableName="interview_ratings">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="Rating" type="int">
+            <column name="rating" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="Feedback" type="clob">
+            <column name="feedback" type="clob">
                 <constraints nullable="false"/>
             </column>
             <column name="interview_id" type="bigint">
@@ -31,18 +31,18 @@
             </column>
         </createTable>
         <addForeignKeyConstraint baseColumnNames="skill_id"
-                                 baseTableName="InterviewRatings"
+                                 baseTableName="interview_ratings"
                                  constraintName="fk_interview_skill_id"
                                  onDelete="CASCADE"
                                  onUpdate="CASCADE"
                                  referencedColumnNames="id"
-                                 referencedTableName="Skills"/>
+                                 referencedTableName="skills"/>
         <addForeignKeyConstraint baseColumnNames="interview_id"
-                                 baseTableName="InterviewRatings"
+                                 baseTableName="interview_ratings"
                                  constraintName="fk_interview_ratings_id"
                                  onDelete="CASCADE"
                                  onUpdate="CASCADE"
                                  referencedColumnNames="id"
-                                 referencedTableName="Interviews"/>
+                                 referencedTableName="interviews"/>
     </changeSet>
 </databaseChangeLog>

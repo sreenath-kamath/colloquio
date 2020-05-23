@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.colloquio.core.Skills;
 import com.colloquio.db.SkillsDao;
 
+import javax.annotation.security.PermitAll;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -22,6 +23,7 @@ public class SkillsResource {
 
     @GET
     @Timed
+    @PermitAll
     public Skills getSkills(
             @QueryParam("id") @NotNull Long skillId
     ) {

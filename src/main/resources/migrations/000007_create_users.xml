@@ -7,17 +7,17 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet id="create_users" author="">
-        <createTable tableName="Users">
+        <createTable tableName="users">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="fullName" type="varchar(255)">
+            <column name="full_name" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="email" type="varchar(30)">
                 <constraints nullable="false" unique="true"/>
             </column>
-            <column name="phonenumber" type="varchar(20)">
+            <column name="phone_number" type="varchar(20)">
                 <constraints nullable="false" unique="true"/>
             </column>
             <column name="password" type="varchar(20)">
