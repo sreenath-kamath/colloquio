@@ -16,5 +16,5 @@ public interface SkillsDao {
     @AllowUnusedBindings
     @SqlQuery("insert into skills(name, description, created_at, updated_at) values(:name, :description, now(), now())")
     @GetGeneratedKeys
-    long createSkill(@Bind("name") String name, @Bind("description") String description);
+    Skills createSkill(@Bind("name") String name, @Bind("description") String description);
 }
