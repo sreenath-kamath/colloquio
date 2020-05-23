@@ -1,0 +1,1 @@
+web: java -Ddw.server.applicationConnectors[0].port=$PORT -jar target/colloquio-1.0-SNAPSHOT.jar server heroku_config.yml

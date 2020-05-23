@@ -1,0 +1,19 @@
+logging:
+  level: INFO
+  loggers:
+    com.colloquio: DEBUG
+organisation:
+  name: "Podacio"
+database:
+  driverClass: org.postgresql.Driver
+  user: lxtpbgihsyktwc
+  password: 8181e900c082ea70fd5aa9c0ee71482d545962dc577c8bf9a9bbddf4c9e9cccf
+  url: jdbc:postgresql://ec2-54-246-90-10.eu-west-1.compute.amazonaws.com:5432/dc69rt2fbes0dh
+  maxWaitForConnection: 1s
+  validationQuery: "/* MyService Health Check */ SELECT 1"
+  validationQueryTimeout: 3s
+  minSize: 8
+  maxSize: 32
+  checkConnectionWhileIdle: false
+  evictionInterval: 10s
+  minIdleTime: 1 minute
