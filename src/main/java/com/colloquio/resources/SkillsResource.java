@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 @Path("metadata/skills")
 @Produces(MediaType.APPLICATION_JSON)
@@ -22,12 +23,20 @@ public class SkillsResource {
         this.skillsDao = skillsDao;
     }
 
+    @GET
+    @Timed
+    @PermitAll
+    public List<Skills> getSkills(){
+        return skillsDao.getSkills();
+    }
+
 
     @GET
     @Timed
     @PermitAll
+    @Path("{id}")
     public Skills getSkills(
-            @QueryParam("id") @NotNull Long skillId
+            @PathParam("id") @NotNull Long skillId
     ) {
         Skills skills = skillsDao.findSkillById(skillId);
         return skills;
@@ -39,8 +48,7 @@ public class SkillsResource {
     public Info createSkill(
             Skills skills
     ){
-        skillsDao.createSkill(skills);
-        long createdSkillId = skillsDao.lastInsertId();
+        long createdSkillId = skillsDao.createSkill(skills);
         return new Info(createdSkillId, skills.getName());
     }
 }

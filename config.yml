@@ -5,10 +5,10 @@ logging:
 organisation:
   name: "Podacio"
 database:
-  driverClass: com.mysql.jdbc.Driver
-  user: root
-  password:
-  url: jdbc:mysql://localhost:3306/colloquio
+  driverClass: org.postgresql.Driver
+  user: colloquio
+  password: hola-colloquio
+  url: jdbc:postgresql://localhost:5432/colloquio
   maxWaitForConnection: 1s
   validationQuery: "/* MyService Health Check */ SELECT 1"
   validationQueryTimeout: 3s
