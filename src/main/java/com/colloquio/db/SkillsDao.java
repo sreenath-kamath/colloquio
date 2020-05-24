@@ -13,11 +13,9 @@ public interface SkillsDao {
     @SqlQuery("select * from skills where id = :id")
     Skills findSkillById(@Bind("id") Long id);
 
-
     @SqlQuery("insert into skills(name, description, created_at, updated_at) values(:name, :description, now(), now()) RETURNING id")
     long createSkill(@BindBean final Skills skills);
 
     @SqlQuery("select id, name, description from skills")
     List<Skills> getSkills();
-
 }
