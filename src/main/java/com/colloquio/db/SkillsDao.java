@@ -14,9 +14,7 @@ public interface SkillsDao {
     Skills findSkillById(@Bind("id") Long id);
 
 
-    @SqlUpdate("insert into skills(name, description, created_at, updated_at) values(:name, :description, now(), now())")
-    void createSkill(@BindBean final Skills skills);
+    @SqlQuery("insert into skills(name, description, created_at, updated_at) values(:name, :description, now(), now()) RETURNING id")
+    long createSkill(@BindBean final Skills skills);
 
-    @SqlQuery("select last_insert_id()")
-    long lastInsertId();
 }

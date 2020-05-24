@@ -39,8 +39,7 @@ public class SkillsResource {
     public Info createSkill(
             Skills skills
     ){
-        skillsDao.createSkill(skills);
-        long createdSkillId = skillsDao.lastInsertId();
+        long createdSkillId = skillsDao.createSkill(skills);
         return new Info(createdSkillId, skills.getName());
     }
 }
