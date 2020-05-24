@@ -7,9 +7,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Skills {
-    @JsonProperty("Name")
+
+    @JsonProperty("name")
     private String name;
 
-    @JsonProperty("Description")
+    @JsonProperty("description")
     private String description;
 }
