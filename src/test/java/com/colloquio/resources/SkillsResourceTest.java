@@ -43,6 +43,7 @@ public class SkillsResourceTest {
         Skills skills = resourceExtension.target("/metadata/skills/1").request().get(Skills.class);
         Assertions.assertEquals(skillName, skills.getName());
         Assertions.assertEquals(skillDescription, skills.getDescription());
+        verify(skillsDao).findSkillById(1L);
     }
 
 }
