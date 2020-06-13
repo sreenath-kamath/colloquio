@@ -1,5 +1,7 @@
 # colloquio
 
+[![Build Status](https://travis-ci.org/sreenathkamath/colloquio.svg?branch=master)](https://travis-ci.org/sreenathkamath/colloquio)
+
 How to start the colloquio application
 ---
 
