@@ -18,9 +18,4 @@ public class User implements Principal {
         this.name = name;
         this.roles = roles;
     }
-
-    @Override
-    public String getName() {
-        return null;
-    }
 }
