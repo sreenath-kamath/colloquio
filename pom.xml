@@ -97,6 +97,12 @@
             <artifactId>postgresql</artifactId>
             <version>42.2.12</version>
         </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-library</artifactId>
+            <version>2.1</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>

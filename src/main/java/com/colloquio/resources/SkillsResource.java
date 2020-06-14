@@ -51,7 +51,7 @@ public class SkillsResource {
     @Timed
     @PermitAll
     public Info createSkill(
-            Skills skills
+            @Valid @NotNull Skills skills
     ){
         long createdSkillId = skillsDao.createSkill(skills);
         return new Info(createdSkillId, skills.getName());
