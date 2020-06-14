@@ -6,12 +6,13 @@ import org.jdbi.v3.sqlobject.customizer.Bind;
 import org.jdbi.v3.sqlobject.customizer.BindBean;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import java.util.List;
+import java.util.Optional;
 
 @RegisterBeanMapper(Skills.class)
 public interface SkillsDao {
 
     @SqlQuery("select * from skills where id = :id")
-    Skills findSkillById(@Bind("id") Long id);
+    Optional<Skills> findSkillById(@Bind("id") Long id);
 
     @SqlQuery("insert into skills(name, description, created_at, updated_at) values(:name, :description, now(), now()) RETURNING id")
     long createSkill(@BindBean final Skills skills);

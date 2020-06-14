@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
+import java.util.Optional;
 
 @Path("metadata/skills")
 @Produces(MediaType.APPLICATION_JSON)
@@ -38,7 +39,11 @@ public class SkillsResource {
     public Skills getSkills(
             @PathParam("id") @NotNull Long skillId
     ) {
-        Skills skills = skillsDao.findSkillById(skillId);
+        Optional<Skills> optionalSkills = skillsDao.findSkillById(skillId);
+        Skills skills = optionalSkills.orElse(null);
+        if (skills == null) {
+            throw new NotFoundException(String.format("Cannot find the skill with id: %d", skillId));
+        }
         return skills;
     }
 
