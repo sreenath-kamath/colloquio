@@ -1,0 +1,24 @@
+logging:
+  level: INFO
+  loggers:
+    com.colloquio: DEBUG
+organisation:
+  name: "Hogwarts"
+server:
+  type: default
+  applicationConnectors:
+    -   type: http
+        port: 8080
+database:
+  driverClass: org.postgresql.Driver
+  user: harry
+  password: potter
+  url: jdbc:postgresql://localhost:5432/dc69rt2fbes0dh
+  maxWaitForConnection: 1s
+  validationQuery: "/* MyService Health Check */ SELECT 1"
+  validationQueryTimeout: 3s
+  minSize: 8
+  maxSize: 32
+  checkConnectionWhileIdle: false
+  evictionInterval: 10s
+  minIdleTime: 1 minute
