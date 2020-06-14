@@ -1,7 +1,7 @@
 # colloquio
 
 [![Build Status](https://travis-ci.org/sreenathkamath/colloquio.svg?branch=master)](https://travis-ci.org/sreenathkamath/colloquio)
-[![Coverage Status](https://coveralls.io/repos/github/sreenathkamath/colloquio/badge.svg)](https://coveralls.io/github/sreenathkamath/colloquio)
+[![Coverage Status](https://coveralls.io/repos/github/sreenathkamath/colloquio/badge.svg?branch=master)](https://coveralls.io/github/sreenathkamath/colloquio)
 
 How to start the colloquio application
 ---
