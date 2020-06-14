@@ -1,22 +1,18 @@
 package com.colloquio.resources;
 
-
+import com.colloquio.api.Info;
 import com.colloquio.core.Skills;
 import com.colloquio.db.SkillsDao;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
 import io.dropwizard.testing.junit5.ResourceExtension;
 import lombok.Getter;
 import lombok.Setter;
-import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
-import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.extension.ExtendWith;
-
-
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
@@ -30,7 +26,6 @@ import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 import static org.hamcrest.MatcherAssert.assertThat;
-
 
 @ExtendWith(DropwizardExtensionsSupport.class)
 public class SkillsResourceTest {
@@ -48,15 +43,15 @@ public class SkillsResourceTest {
             .builder()
             .addResource(new SkillsResource(skillsDao))
             .build();
-    private Skills skills;
+    private Skills seekerSkills;
     private final String skillName = "seeker";
     private final String skillDescription  = "A person who can catch the snitch";
 
     @BeforeEach
     void setup() {
-        skills = new Skills();
-        skills.setName(skillName);
-        skills.setDescription(skillDescription);
+        seekerSkills = new Skills();
+        seekerSkills.setName(skillName);
+        seekerSkills.setDescription(skillDescription);
     }
 
     @AfterEach
@@ -66,7 +61,7 @@ public class SkillsResourceTest {
 
     @Test
     public void testGetIndividualResource() {
-        when(skillsDao.findSkillById(1L)).thenReturn(Optional.ofNullable(skills));
+        when(skillsDao.findSkillById(1L)).thenReturn(Optional.ofNullable(seekerSkills));
         Skills skills = resourceExtension.target("/metadata/skills/1").request().get(Skills.class);
         Assertions.assertEquals(skillName, skills.getName());
         Assertions.assertEquals(skillDescription, skills.getDescription());
@@ -83,13 +78,13 @@ public class SkillsResourceTest {
 
     @Test
     public void testGetSkillsList() {
-        when(skillsDao.getSkills()).thenReturn(Collections.singletonList(skills));
+        when(skillsDao.getSkills()).thenReturn(Collections.singletonList(seekerSkills));
         final Response response = resourceExtension.target("/metadata/skills").request().get();
         Assertions.assertEquals(Response.Status.OK.getStatusCode(), response.getStatusInfo().getStatusCode());
         List<Skills> returnedSkills = response.readEntity(new GenericType<List<Skills>>() {});
         Assertions.assertEquals(1, returnedSkills.size());
-        Assertions.assertEquals(skills.getName(), returnedSkills.get(0).getName());
-        Assertions.assertEquals(skills.getDescription(), returnedSkills.get(0).getDescription());
+        Assertions.assertEquals(seekerSkills.getName(), returnedSkills.get(0).getName());
+        Assertions.assertEquals(seekerSkills.getDescription(), returnedSkills.get(0).getDescription());
     }
 
     @Test
@@ -103,5 +98,16 @@ public class SkillsResourceTest {
         Assertions.assertEquals(2, errorResponse.getErrors().size());
         assertThat(expectedErrorResponses, Matchers.hasItem("name must not be empty"));
         assertThat(expectedErrorResponses, Matchers.hasItem("description must not be empty"));
+    }
+
+    @Test
+    public void testSkillsCreation() {
+        when(skillsDao.createSkill(any())).thenReturn(123L);
+        Entity<Skills> skillsEntity = Entity.entity(seekerSkills, MediaType.APPLICATION_JSON_TYPE);
+        final Response response = resourceExtension.target("/metadata/skills").request().post(skillsEntity);
+        Assertions.assertEquals(Response.Status.OK.getStatusCode(), response.getStatusInfo().getStatusCode());
+        Info creationResponse = response.readEntity(new GenericType<Info>() {});
+        Assertions.assertEquals(123L, creationResponse.getId());
+        Assertions.assertEquals(seekerSkills.getName(), creationResponse.getName());
     }
 }

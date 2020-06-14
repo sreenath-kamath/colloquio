@@ -22,4 +22,8 @@ public class Info {
         this.name = name;
     }
 
+    public Info() {
+
+    }
+
 }
