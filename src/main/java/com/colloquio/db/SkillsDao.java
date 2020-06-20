@@ -19,4 +19,7 @@ public interface SkillsDao {
 
     @SqlQuery("select id, name, description from skills")
     List<Skills> getSkills();
+
+    @SqlQuery("select count(*) from skills where name = :name")
+    Long doesSkillExist(@Bind("name") String name);
 }

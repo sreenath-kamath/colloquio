@@ -53,6 +53,10 @@ public class SkillsResource {
     public Info createSkill(
             @Valid @NotNull Skills skills
     ){
+        long count = skillsDao.doesSkillExist(skills.getName());
+        if (count > 0) {
+            throw new NotAcceptableException(String.format("Skills with name %s already exits", skills.getName()));
+        }
         long createdSkillId = skillsDao.createSkill(skills);
         return new Info(createdSkillId, skills.getName());
     }
