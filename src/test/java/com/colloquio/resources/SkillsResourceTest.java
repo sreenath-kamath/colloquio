@@ -3,6 +3,7 @@ package com.colloquio.resources;
 import com.colloquio.api.Info;
 import com.colloquio.core.Skills;
 import com.colloquio.db.SkillsDao;
+import com.fasterxml.jackson.databind.JsonNode;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
 import io.dropwizard.testing.junit5.ResourceExtension;
 import lombok.Getter;
@@ -103,11 +104,23 @@ public class SkillsResourceTest {
     @Test
     public void testSkillsCreation() {
         when(skillsDao.createSkill(any())).thenReturn(123L);
+        when(skillsDao.doesSkillExist(any())).thenReturn(0L);
         Entity<Skills> skillsEntity = Entity.entity(seekerSkills, MediaType.APPLICATION_JSON_TYPE);
         final Response response = resourceExtension.target("/metadata/skills").request().post(skillsEntity);
         Assertions.assertEquals(Response.Status.OK.getStatusCode(), response.getStatusInfo().getStatusCode());
         Info creationResponse = response.readEntity(new GenericType<Info>() {});
         Assertions.assertEquals(123L, creationResponse.getId());
         Assertions.assertEquals(seekerSkills.getName(), creationResponse.getName());
+    }
+
+    @Test
+    public void testSkillsCreationDuplicateResource() {
+        when(skillsDao.createSkill(any())).thenReturn(123L);
+        when(skillsDao.doesSkillExist(any())).thenReturn(1L);
+        Entity<Skills> skillsEntity = Entity.entity(seekerSkills, MediaType.APPLICATION_JSON_TYPE);
+        final Response response = resourceExtension.target("/metadata/skills").request().post(skillsEntity);
+        Assertions.assertEquals(Response.Status.NOT_ACCEPTABLE.getStatusCode(), response.getStatusInfo().getStatusCode());
+        JsonNode creationResponse = response.readEntity(new GenericType<JsonNode>() {});
+        Assertions.assertEquals("\"Skills with name seeker already exits\"", creationResponse.get("message").toString());
     }
 }
