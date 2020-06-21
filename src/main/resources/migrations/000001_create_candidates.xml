@@ -11,13 +11,13 @@
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="fullName" type="varchar(255)">
+            <column name="full_name" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="email" type="varchar(30)">
                 <constraints nullable="false"/>
             </column>
-            <column name="phonenumber" type="varchar(20)">
+            <column name="phone_number" type="varchar(20)">
                 <constraints nullable="false"/>
             </column>
             <column name="created_at" type="datetime">
