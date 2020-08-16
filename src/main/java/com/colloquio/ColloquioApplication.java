@@ -2,9 +2,11 @@ package com.colloquio;
 
 import com.colloquio.auth.ColloquioBasicAuthenticator;
 import com.colloquio.core.User;
+import com.colloquio.db.CandidatesDao;
 import com.colloquio.db.SkillsDao;
 import com.colloquio.db.UserDao;
 import com.colloquio.resources.AboutResource;
+import com.colloquio.resources.CandidatesResouce;
 import com.colloquio.resources.InterviewsResource;
 import com.colloquio.resources.SkillsResource;
 import io.dropwizard.Application;
@@ -49,12 +51,14 @@ public class ColloquioApplication extends Application<ColloquioConfiguration> {
 
         final SkillsDao skillsDao = jdbi.onDemand(SkillsDao.class);
         final UserDao userDao = jdbi.onDemand(UserDao.class);
+        final CandidatesDao candidatesDao = jdbi.onDemand(CandidatesDao.class);
 
         final AboutResource aboutResource = new AboutResource(
             configuration.getOrganisation().getName()
         );
         final InterviewsResource  interviewsResource = new InterviewsResource();
         final SkillsResource skillsResource = new SkillsResource(skillsDao);
+        final CandidatesResouce candidatesResouce = new CandidatesResouce(candidatesDao);
         environment.jersey().register(new AuthDynamicFeature(new BasicCredentialAuthFilter.Builder<User>()
                 .setAuthenticator(new ColloquioBasicAuthenticator(userDao))
                 .setRealm("SUPER SECRET STUFF")
@@ -63,6 +67,7 @@ public class ColloquioApplication extends Application<ColloquioConfiguration> {
         environment.jersey().register(aboutResource);
         environment.jersey().register(interviewsResource);
         environment.jersey().register(skillsResource);
+        environment.jersey().register(candidatesResouce);
     }
 
 }

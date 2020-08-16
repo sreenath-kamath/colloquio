@@ -2,7 +2,7 @@
  
 |Item|Status|
 |:----:|:------:|
-|Master Build Status|[![Build Status](https://travis-ci.org/sreenath-kamath/colloquio.svg?branch=master)](https://travis-ci.org/sreenath-kamath/colloquio)|
+|Master Build Status|![Build Status](https://github.com/sreenath-kamath/colloquio/workflows/Java%20CI%20with%20Maven/badge.svg)|
 |Master Code Coverage|[![Coverage Status](https://coveralls.io/repos/github/sreenath-kamath/colloquio/badge.svg?branch=master)](https://coveralls.io/github/sreenath-kamath/colloquio?branch=master)|
 
 

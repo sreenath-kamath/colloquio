@@ -95,7 +95,7 @@ public class SkillsResourceTest {
         final Response response = resourceExtension.target("/metadata/skills").request().post(skillsEntity);
         Assertions.assertEquals(422, response.getStatusInfo().getStatusCode());
         ErrorResponse errorResponse = response.readEntity(new GenericType<ErrorResponse>() {});
-        List<String> expectedErrorResponses = new ArrayList<>(Arrays.asList("name must not be empty", "description must not be empty"));
+        List<String> expectedErrorResponses = errorResponse.getErrors();
         Assertions.assertEquals(2, errorResponse.getErrors().size());
         assertThat(expectedErrorResponses, Matchers.hasItem("name must not be empty"));
         assertThat(expectedErrorResponses, Matchers.hasItem("description must not be empty"));
