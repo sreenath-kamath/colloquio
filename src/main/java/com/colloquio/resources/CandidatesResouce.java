@@ -3,6 +3,7 @@ package com.colloquio.resources;
 import com.codahale.metrics.annotation.Timed;
 import com.colloquio.api.Info;
 import com.colloquio.core.Candidate;
+import com.colloquio.core.Skills;
 import com.colloquio.db.CandidatesDao;
 
 import javax.annotation.security.PermitAll;
@@ -11,11 +12,14 @@ import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.NotAcceptableException;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
+import java.util.Optional;
 
 @Path("/candidate")
 @Produces(MediaType.APPLICATION_JSON)
@@ -48,4 +52,18 @@ public class CandidatesResouce {
         return candidatesDao.getAllCandidates();
     }
 
+    @GET
+    @Timed
+    @PermitAll
+    @Path("{id}")
+    public Candidate getCandidate(
+            @PathParam("id") @NotNull Long candidateId
+    ) {
+        Optional<Candidate> optionalCandidate = candidatesDao.findCandidateById(candidateId);
+        Candidate candidate = optionalCandidate.orElse(null);
+        if (candidate == null) {
+            throw new NotFoundException(String.format("Cannot find the Candidate with id: %d", candidateId));
+        }
+        return candidate;
+    }
 }
