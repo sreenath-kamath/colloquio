@@ -91,7 +91,7 @@ public class CandidatesResourceTest {
         Candidate candidate = new Candidate();
         Entity<Candidate> candidateEntity = Entity.entity(candidate, MediaType.APPLICATION_JSON_TYPE);
         final Response response = resourceExtension.target("/candidate").request().post(candidateEntity);
-        Assertions.assertEquals(422, response.getStatusInfo().getStatusCode());
+        Assertions.assertEquals(4211, response.getStatusInfo().getStatusCode());
         SkillsResourceTest.ErrorResponse errorResponse = response.readEntity(new GenericType<SkillsResourceTest.ErrorResponse>() {});
         List<String> expectedErrorResponses = errorResponse.getErrors();
         Assertions.assertEquals(3, errorResponse.getErrors().size());
