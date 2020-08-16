@@ -18,6 +18,8 @@ import io.dropwizard.jdbi3.JdbiFactory;
 import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import io.federecio.dropwizard.swagger.SwaggerBundle;
+import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import org.jdbi.v3.core.Jdbi;
 
 public class ColloquioApplication extends Application<ColloquioConfiguration> {
@@ -41,6 +43,12 @@ public class ColloquioApplication extends Application<ColloquioConfiguration> {
             }
         });
 
+        bootstrap.addBundle(new SwaggerBundle<ColloquioConfiguration>() {
+            @Override
+            protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(ColloquioConfiguration configuration) {
+                return configuration.swaggerBundleConfiguration;
+            }
+        });
     }
 
     @Override
