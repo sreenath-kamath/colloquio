@@ -1,7 +1,11 @@
-# colloquio
+# Colloquio
+ 
+|Item|Status|
+|:----:|:------:|
+|Master Build Status|[![Build Status](https://travis-ci.org/sreenath-kamath/colloquio.svg?branch=master)](https://travis-ci.org/sreenath-kamath/colloquio)|
+|Master Code Coverage|[![Coverage Status](https://coveralls.io/repos/github/sreenath-kamath/colloquio/badge.svg?branch=master)](https://coveralls.io/github/sreenath-kamath/colloquio?branch=master)|
 
-[![Build Status](https://travis-ci.org/sreenathkamath/colloquio.svg?branch=master)](https://travis-ci.org/sreenathkamath/colloquio)
-[![Coverage Status](https://coveralls.io/repos/github/sreenathkamath/colloquio/badge.svg?branch=master)](https://coveralls.io/github/sreenathkamath/colloquio?branch=master)
+
 
 How to start the colloquio application
 ---
