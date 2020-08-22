@@ -2,7 +2,6 @@ package com.colloquio.resources;
 
 import com.colloquio.api.Info;
 import com.colloquio.core.Candidate;
-import com.colloquio.core.Skills;
 import com.colloquio.db.CandidatesDao;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
@@ -18,8 +17,6 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -37,7 +34,7 @@ public class CandidatesResourceTest {
     private static final CandidatesDao candidatesDao = mock(CandidatesDao.class);
     private static final ResourceExtension resourceExtension = ResourceExtension
             .builder()
-            .addResource(new CandidatesResouce(candidatesDao))
+            .addResource(new CandidatesResource(candidatesDao))
             .build();
 
     private Candidate harryPottercandidate;
