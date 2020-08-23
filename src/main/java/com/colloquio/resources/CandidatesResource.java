@@ -24,11 +24,11 @@ import java.util.Optional;
 @Path("/candidate")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class CandidatesResouce {
+public class CandidatesResource {
 
     private final CandidatesDao candidatesDao;
 
-    public CandidatesResouce(CandidatesDao candidatesDao) {
+    public CandidatesResource(CandidatesDao candidatesDao) {
         this.candidatesDao = candidatesDao;
     }
 
