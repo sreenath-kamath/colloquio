@@ -1,18 +1,13 @@
 package com.colloquio.resources;
 
 import com.colloquio.api.Info;
-import com.colloquio.core.Candidate;
-import com.colloquio.core.InterviewRound;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
 import io.dropwizard.testing.junit5.ResourceExtension;
-import io.swagger.models.auth.In;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
