@@ -20,12 +20,15 @@ import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(DropwizardExtensionsSupport.class)
@@ -86,5 +89,32 @@ class InterviewRoundsResourceTest {
         Assertions.assertEquals(Response.Status.NOT_ACCEPTABLE.getStatusCode(), response.getStatusInfo().getStatusCode());
         JsonNode creationResponse = response.readEntity(new GenericType<JsonNode>() {});
         Assertions.assertEquals("\"InterviewRound with this name already exits\"", creationResponse.get("message").toString());
+    }
+
+    @Test
+    public void testInterviewRoundList() {
+        when(interviewRoundDao.getAllInterviewRounds()).thenReturn(Collections.singletonList(interviewRound));
+        final Response response = resourceExtension.target("/interview_rounds").request().get();
+        Assertions.assertEquals(Response.Status.OK.getStatusCode() , response.getStatusInfo().getStatusCode());
+        List<InterviewRound> candidateList = response.readEntity(new GenericType<List<InterviewRound>>() {});
+        Assertions.assertEquals(1, candidateList.size());
+        verify(interviewRoundDao).getAllInterviewRounds();
+    }
+
+    @Test
+    public void testGetIndividualResource() {
+        when(interviewRoundDao.findInterviewRoundById(1L)).thenReturn(Optional.ofNullable(interviewRound));
+        InterviewRound interviewRound = resourceExtension.target("/interview_rounds/1").request().get(InterviewRound.class);
+        Assertions.assertEquals(interviewRoundName, interviewRound.getName(), "Name doesn't match");
+        Assertions.assertEquals(interviewRoundDescription, interviewRound.getDescription(), "Description doesn't match");
+        verify(interviewRoundDao).findInterviewRoundById(1L);
+    }
+
+    @Test
+    public void testGetIndividualRecordNotFound() {
+        when(interviewRoundDao.findInterviewRoundById(1L)).thenReturn(Optional.empty());
+        final Response response = resourceExtension.target("/interview_rounds/1").request().get();
+        Assertions.assertEquals(Response.Status.NOT_FOUND.getStatusCode() , response.getStatusInfo().getStatusCode());
+        verify(interviewRoundDao).findInterviewRoundById(1L);
     }
 }
