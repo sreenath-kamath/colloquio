@@ -2,7 +2,6 @@ package com.colloquio.resources;
 
 import com.codahale.metrics.annotation.Timed;
 import com.colloquio.api.Info;
-import com.colloquio.core.Candidate;
 import com.colloquio.core.InterviewRound;
 import com.colloquio.db.InterviewRoundDao;
 
