@@ -1,7 +1,6 @@
 package com.colloquio.db;
 
 import com.colloquio.core.Candidate;
-import com.colloquio.core.Skills;
 import org.jdbi.v3.sqlobject.config.RegisterBeanMapper;
 import org.jdbi.v3.sqlobject.customizer.Bind;
 import org.jdbi.v3.sqlobject.customizer.BindBean;
