@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet id="initial_data_load" author="">
+        <insert tableName="interview_rounds">
+            <column name="name" value="Coding"/>
+            <column name="description" value="A round to evaluate the coding skills of candidate"/>
+            <column name="created_at" value="now()"/>
+            <column name="updated_at" value="now()"/>
+        </insert>
+        <insert tableName="interview_round_skills">
+            <column name="interview_round_id" value="1"/>
+            <column name="skill_id" value="1"/>
+            <column name="created_at" value="now()"/>
+            <column name="updated_at" value="now()"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
